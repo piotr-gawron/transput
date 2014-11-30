@@ -16,9 +16,9 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <target name="create_run_jar">
-						<delete file="C:/Users/piotr.gawron/workspace/transport/transport.jar" />
+						<delete file="transport.jar" />
 						
-		        <jar destfile="C:/Users/piotr.gawron/workspace/transport/transport.jar">
+		        <jar destfile="transport.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="put.Main"/>
@@ -26,11 +26,11 @@
                 <attribute name="Rsrc-Class-Path" value="./ junit.jar org.hamcrest.core_1.3.0.v201303031735.jar log4j-1.2.17.jar commons-cli-1.2.jar"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
-            <fileset dir="C:/Users/piotr.gawron/workspace/transport/bin"/>
+            <fileset dir="bin"/>
             <zipfileset dir="C:\Program Files\eclipse\plugins\org.junit_4.11.0.v201303080030" includes="junit.jar"/>
             <zipfileset dir="C:\Program Files\eclipse\plugins" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
-            <zipfileset dir="C:\Users\piotr.gawron\workspace\transport\lib" includes="log4j-1.2.17.jar"/>
-            <zipfileset dir="C:\Users\piotr.gawron\workspace\transport\lib" includes="commons-cli-1.2.jar"/>
+            <zipfileset dir="lib" includes="log4j-1.2.17.jar"/>
+            <zipfileset dir="lib" includes="commons-cli-1.2.jar"/>
         </jar>
     </target>
 </project>

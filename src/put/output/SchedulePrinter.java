@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import put.Configuration;
 import put.data.ConnectionStop;
 import put.data.Municipality;
-import put.data.OtherMunicipality;
 import put.data.TransportConnection;
 import put.data.TransportType;
 import put.graph.TrafficSource;
