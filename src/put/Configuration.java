@@ -32,6 +32,7 @@ public class Configuration {
 	private String	municipalitiesCoordinatesFileName	= "data/coordinates.txt";
 
 	private String	trainTimeFileName									= null;
+	private String	trainConnectionFileName						= "data/trainConnection.txt";
 	private String	trainNeighborhoodFileName					= "data/trainNeighborhood.txt";
 	private String	trainsFileName										= null;
 
@@ -49,7 +50,9 @@ public class Configuration {
 	private double	negligibleTrafficSize							= 0.1;
 
 	private int			busSize														= 80;
+	private double	busKmCost													= 6.4;
 	private int			trainSize													= 200;
+	private double	trainKmCost												= 24;
 
 	private double	epsilon														= 1e-6;
 
@@ -107,6 +110,8 @@ public class Configuration {
 
 		if (cmd.getOptionValue("tt") != null)
 			trainTimeFileName = cmd.getOptionValue("tt");
+		if (cmd.getOptionValue("td") != null)
+			trainConnectionFileName = cmd.getOptionValue("td");
 		if (cmd.getOptionValue("tc") != null)
 			trainNeighborhoodFileName = cmd.getOptionValue("tc");
 		if (cmd.getOptionValue("tl") != null)
@@ -128,6 +133,7 @@ public class Configuration {
 		logger.debug("* busNeighborhoodFileName: " + busNeighborhoodFileName);
 		logger.debug("* busesFileName: " + busesFileName);
 
+		logger.debug("* trainConnectionFileName: " + trainConnectionFileName);
 		logger.debug("* trainTimeFileName: " + trainTimeFileName);
 		logger.debug("* trainNeighborhoodFileName: " + trainNeighborhoodFileName);
 		logger.debug("* trainsFileName: " + trainsFileName);
@@ -142,7 +148,8 @@ public class Configuration {
 		logger.debug("* minTrafficForConnection: " + minTrafficForConnection);
 
 		logger.debug("* busSize: " + busSize);
-		logger.debug("* trainSize: " + trainSize);
+		logger.debug("* busKmCost: " + busKmCost);
+		logger.debug("* trainKmCost: " + trainKmCost);
 
 		validConfiguration = true;
 	}
@@ -180,6 +187,9 @@ public class Configuration {
 		if (prop.getProperty("file.trains") != null) {
 			trainsFileName = prop.getProperty("file.trains");
 		}
+		if (prop.getProperty("file.trainConnection") != null) {
+			trainConnectionFileName = prop.getProperty("file.trainConnection");
+		}
 
 		if (prop.getProperty("file.traffic") != null) {
 			trafficFileName = prop.getProperty("file.traffic");
@@ -207,8 +217,14 @@ public class Configuration {
 		if (prop.getProperty("busSize") != null) {
 			busSize = Integer.valueOf(prop.getProperty("busSize"));
 		}
+		if (prop.getProperty("busKmCost") != null) {
+			busKmCost= Double.valueOf(prop.getProperty("busKmCost"));
+		}
 		if (prop.getProperty("trainSize") != null) {
 			trainSize = Integer.valueOf(prop.getProperty("trainSize"));
+		}
+		if (prop.getProperty("trainKmCost") != null) {
+			trainKmCost= Double.valueOf(prop.getProperty("trainKmCost"));
 		}
 	}
 
@@ -346,6 +362,30 @@ public class Configuration {
 
 	public double getEpsilon() {
 		return epsilon;
+	}
+
+	/**
+	 * @return the trainConnectionFileName
+	 * @see #trainConnectionFileName
+	 */
+	public String getTrainConnectionFileName() {
+		return trainConnectionFileName;
+	}
+
+	/**
+	 * @return the busKmCost
+	 * @see #busKmCost
+	 */
+	public double getBusKmCost() {
+		return busKmCost;
+	}
+
+	/**
+	 * @return the trainKmCost
+	 * @see #trainKmCost
+	 */
+	public double getTrainKmCost() {
+		return trainKmCost;
 	}
 
 }

@@ -5,14 +5,22 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 import put.Configuration;
 import put.data.ConnectionStop;
+import put.data.Municipality;
+import put.data.OtherMunicipality;
 import put.data.TransportConnection;
+import put.data.TransportType;
 import put.graph.TrafficSource;
 
 public class SchedulePrinter {
+	Logger										logger			= Logger.getLogger(SchedulePrinter.class);
 	List<TransportConnection>	connections	= new ArrayList<TransportConnection>();
 
 	public SchedulePrinter(List<TransportConnection> connections) {
@@ -28,6 +36,32 @@ public class SchedulePrinter {
 		out.print("</head>");
 		out.print("<body>");
 
+		Map<TransportType, Double> cost = new HashMap<TransportType, Double>();
+
+		for (TransportType type : TransportType.values()) {
+			cost.put(type, 0.0);
+		}
+		for (TransportConnection tc : connections) {
+			TransportType type = tc.getType();
+
+			Double typeCost = cost.get(type);
+			for (int i = 1; i < tc.getStops().size(); i++) {
+				Municipality first = tc.getStop(i - 1).getMunicipality();
+				Municipality second = tc.getStop(i).getMunicipality();
+				if (first.getClass().equals(Municipality.class) && second.getClass().equals(Municipality.class)) {
+					double distance = tc.getDistanceBetweenStops(first, second);
+					typeCost += type.getTransportTypeData().kmCost() * distance;
+				}
+			}
+			cost.put(type, typeCost);
+		}
+		out.print("<h1>Cost</h1>");
+		for (TransportType type : TransportType.values()) {
+			Double distance = cost.get(type);
+			out.print("<h2>" + type.getCommonName() + ": " + doubleToString(distance) + "</h2>");
+		}
+
+		out.print("<h1>Connections</h1>");
 		for (TransportConnection tc : connections) {
 			out.print(connectionToHtml(tc));
 			out.print("<br/><br/>");
@@ -40,7 +74,17 @@ public class SchedulePrinter {
 	public String connectionToHtml(TransportConnection tc) {
 		StringBuilder result = new StringBuilder();
 
-		result.append("<b>[" + tc.getType().getCommonName() + "] " + tc.getName() + "</b><br/>\n");
+		Double cost = 0.0;
+		for (int i = 1; i < tc.getStops().size(); i++) {
+			Municipality first = tc.getStop(i - 1).getMunicipality();
+			Municipality second = tc.getStop(i).getMunicipality();
+			if (first.getClass().equals(Municipality.class) && second.getClass().equals(Municipality.class)) {
+				double distance = tc.getDistanceBetweenStops(first, second);
+				cost += tc.getType().getTransportTypeData().kmCost() * distance;
+			}
+		}
+
+		result.append("<b>[" + tc.getType().getCommonName() + "] " + tc.getName() + " (Cost: " + doubleToString(cost) + ")</b><br/>\n");
 
 		result.append("<table border=\"1\" >\n");
 		result.append("<tr>");
@@ -64,7 +108,8 @@ public class SchedulePrinter {
 					if (ts.getAmount() > Configuration.getConfiguration().getNegligibleTrafficSize() && ts.getStart().equals(stop.getMunicipality())
 							&& ts.getStop().equals(stop2.getMunicipality()) && !processedSources.contains(ts)) {
 						amount += ts.getAmount();
-						desc.append(ts.getConnection().getStart().getName() + " - " + ts.getConnection().getStop().getName() + " ("+doubleToString(ts.getAmount())+")\n");
+						desc.append(ts.getConnection().getStart().getName() + " - " + ts.getConnection().getStop().getName() + " (" + doubleToString(ts.getAmount())
+								+ ")\n");
 						processedSources.add(ts);
 					}
 				}
@@ -82,7 +127,8 @@ public class SchedulePrinter {
 							&& ts.getStart().equals(stop2.getMunicipality())) {
 						amount += ts.getAmount();
 
-						desc.append(ts.getConnection().getStart().getName() + " - " + ts.getConnection().getStop().getName() + " ("+doubleToString(ts.getAmount())+")\n");
+						desc.append(ts.getConnection().getStart().getName() + " - " + ts.getConnection().getStop().getName() + " (" + doubleToString(ts.getAmount())
+								+ ")\n");
 
 					}
 
@@ -101,8 +147,8 @@ public class SchedulePrinter {
 
 		return result.toString();
 	}
-	
+
 	public String doubleToString(double d) {
-		return String.format("%1$,.2f", d);		
+		return String.format("%1$,.2f", d);
 	}
 }

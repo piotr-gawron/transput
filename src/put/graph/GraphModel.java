@@ -29,7 +29,7 @@ public class GraphModel {
 	public List<GraphConnection>			successorEdges[]		= null;
 	List<GraphConnection>			predecessorEdges[]	= null;
 
-	List<GraphConnection>			bestConnections[][];
+	private List<GraphConnection>			bestConnections[][];
 
 	Configuration							configuration;
 
@@ -529,6 +529,22 @@ public class GraphModel {
 		}
 
 		return result;
+	}
+
+	/**
+	 * @return the bestConnections
+	 * @see #bestConnections
+	 */
+	public List<GraphConnection>[][] getBestConnections() {
+		return bestConnections;
+	}
+
+	/**
+	 * @param bestConnections the bestConnections to set
+	 * @see #bestConnections
+	 */
+	public void setBestConnections(List<GraphConnection> bestConnections[][]) {
+		this.bestConnections = bestConnections;
 	}
 
 }

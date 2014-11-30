@@ -15,7 +15,9 @@ import put.Configuration;
 import put.data.ConnectionStop;
 import put.data.Municipalities;
 import put.data.Municipality;
+import put.data.MunicipalityConnection;
 import put.data.TransportConnection;
+import put.data.TransportType;
 import put.graph.GraphConnection;
 import put.graph.GraphModel;
 
@@ -94,12 +96,12 @@ public class Report {
 			if (t != null)
 				traffic = String.format("%1$,.2f", t);
 
-			t = municipalities.getConnection(i,start).getTraffic();
+			t = municipalities.getConnection(i, start).getTraffic();
 			String traffic2 = "N/A";
 			if (t != null)
 				traffic2 = String.format("%1$,.2f", t);
-			
-			result.append("<tr><td><a href=\"" + i + ".html\">" + end.getName() + "</a></td><td title=\"opposite: "+traffic2+"\">" + traffic + "</td>");
+
+			result.append("<tr><td><a href=\"" + i + ".html\">" + end.getName() + "</a></td><td title=\"opposite: " + traffic2 + "\">" + traffic + "</td>");
 			result.append("<td>");
 			List<GraphConnection> connections = gm.getConnection(municipality, end);
 			if (connections == null) {
@@ -126,6 +128,9 @@ public class Report {
 		result.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 		result.append("</head>");
 		result.append("<body>");
+		result.append("<h1>Passengers: " + doubleToString(getPassengerNumber()) + "</h1>");
+		result.append("<h1>Total travel time: " + doubleToString(getPassengersTravelTime()) + "</h1>");
+		result.append("<h1>Average travel time: " + doubleToString(getPassengersTravelTime() / getPassengerNumber()) + "</h1>");
 		result.append("<h1>List of municipalities</h1>");
 		result.append("<ul>");
 		for (int i = 0; i < municipalities.getMunicipalityCount(); i++) {
@@ -136,7 +141,6 @@ public class Report {
 
 		result.append("</body>");
 		return result.toString();
-
 	}
 
 	public void createReportPack(String dir) throws FileNotFoundException, UnsupportedEncodingException {
@@ -150,8 +154,51 @@ public class Report {
 			out.print(createReportForMunicipality(municipalities.getMunicipality(i)));
 			out.close();
 		}
-
 	}
-	
+
+	private double getPassengerNumber() {
+		double res = 0.0;
+		int count = municipalities.getMunicipalityCount();
+		for (int i = 0; i < count; i++)
+			for (int j = 0; j < count; j++) {
+				MunicipalityConnection mc = municipalities.getConnection(i, j);
+				if (mc.getTraffic() != null) {
+					res += mc.getTraffic();
+				}
+			}
+		return res;
+	}
+
+	private double getPassengersTravelTime() {
+		double res = 0.0;
+		int count = municipalities.getMunicipalityCount();
+		for (int i = 0; i < count; i++)
+			for (int j = 0; j < count; j++) {
+				MunicipalityConnection mc = municipalities.getConnection(i, j);
+				List<GraphConnection> connection = gm.getConnection(municipalities.getMunicipality(i), municipalities.getMunicipality(j));
+				if (mc.getTraffic() != null && connection != null) {
+					double people = mc.getTraffic();
+					double time = 0;
+					for (int k = 0; k < connection.size(); k++) {
+						time += connection.get(k).getFastestConnection();
+					}
+					for (int k = 1; k < connection.size(); k++) {
+						TransportType last = connection.get(k - 1).getType();
+						TransportType current = connection.get(k).getType();
+						if (last.equals(current)) {
+							time += Configuration.getConfiguration().getChangeSameTransportTypeTime();
+						} else {
+							time += Configuration.getConfiguration().getChangeDifferentTransportTypeTime();
+						}
+					}
+					res += time * people;
+				}
+			}
+		return res;
+	}
+
+	public String doubleToString(double d) {
+		return String.format("%1$,.2f", d);
+	}
 
 }

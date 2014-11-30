@@ -123,4 +123,7 @@ public class TransportConnection {
 		this.trafficSources = trafficSources;
 	}
 
+	public double getDistanceBetweenStops(Municipality first, Municipality last) {
+		return type.getTransportTypeData().distanceBetween(first, last);
+	}
 }

@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import put.Configuration;
 
 public class BusTransportData implements TransportTypeData {
-	Logger logger = Logger.getLogger(BusTransportData.class);
+	Logger													logger					= Logger.getLogger(BusTransportData.class);
 
 	private static BusTransportData	instance				= null;
 	private Municipalities					municipalities	= null;
@@ -29,8 +29,8 @@ public class BusTransportData implements TransportTypeData {
 	public int timeBetween(ConnectionStop from, ConnectionStop to) {
 		MunicipalityConnection connection = municipalities.getConnection(from.getMunicipality(), to.getMunicipality());
 		double distance = 100000;
-		if (connection==null || connection.getBusDistance()==null) {
-			logger.warn("Unknown distance between "+from.getMunicipality().getName()+" and "+to.getMunicipality().getName());
+		if (connection == null || connection.getBusDistance() == null) {
+			logger.warn("Unknown distance between " + from.getMunicipality().getName() + " and " + to.getMunicipality().getName());
 		} else {
 			distance = connection.getBusDistance();
 		}
@@ -44,10 +44,27 @@ public class BusTransportData implements TransportTypeData {
 	public void setMunicipalities(Municipalities municipalities) {
 		this.municipalities = municipalities;
 	}
-	
+
 	@Override
 	public double averageSize() {
 		return Configuration.getConfiguration().getBusSize();
+	}
+
+	@Override
+	public double distanceBetween(Municipality from, Municipality to) {
+		MunicipalityConnection connection = municipalities.getConnection(from, to);
+		double distance = 100000;
+		if (connection == null || connection.getBusDistance() == null) {
+			logger.warn("Unknown distance between " + from.getName() + " and " + to.getName());
+		} else {
+			distance = connection.getBusDistance();
+		}
+		return distance;
+	}
+
+	@Override
+	public double kmCost() {
+		return Configuration.getConfiguration().getBusKmCost();
 	}
 
 }

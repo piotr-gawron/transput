@@ -97,6 +97,10 @@ public class Main {
 			logger.info("Reading train neighborhood: " + configuration.getTrainNeighborhoodFileName());
 			trainReader.updateTrainConnections(municipalities, configuration.getTrainNeighborhoodFileName());
 		}
+		if (configuration.getTrainConnectionFileName() != null) {
+			logger.info("Reading train distance: " + configuration.getTrainConnectionFileName());
+			trainReader.updateTrainDistances(municipalities, configuration.getTrainConnectionFileName());
+		}
 
 		List<TransportConnection> buses = new ArrayList<TransportConnection>();
 
@@ -134,14 +138,14 @@ public class Main {
 		suggestedConnections.addAll(graphModel.getAndReduceSinglePossibilites());
 		suggestedConnections.addAll(graphModel.getAndReduceOtherPossibilites());
 
-		 SchedulePrinter sp = new SchedulePrinter(suggestedConnections);
-		 sp.print("out/schedule.html");
-		
-		 Report report = new Report(municipalities,graphModel);
-		 report.addTransportConnections(buses);
-		 report.addTransportConnections(trains);
-		
-		 report.createReportPack("out/");
+		SchedulePrinter sp = new SchedulePrinter(suggestedConnections);
+		sp.print("out/schedule.html");
+
+		Report report = new Report(municipalities, graphModel);
+		report.addTransportConnections(buses);
+		report.addTransportConnections(trains);
+
+		report.createReportPack("out/");
 
 		graphModel.clearTraffic();
 		graphModel.putTrafficOnConnections();
