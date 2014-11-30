@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="main" name="Transport">
+
+	<target name="main" depends="create_run_jar, create_zip">
+	</target>
+
+    <target name="create_zip" depends="create_run_jar">
+
+  <zip destfile="transport.zip" basedir="."
+  	includes="conf/** data/** logs out out/*.png transport.jar"
+  	excludes="logs/transport.log out/*.html"
+  />
+  </target>
+    
+
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+						<delete file="C:/Users/piotr.gawron/workspace/transport/transport.jar" />
+						
+		        <jar destfile="C:/Users/piotr.gawron/workspace/transport/transport.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="put.Main"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ junit.jar org.hamcrest.core_1.3.0.v201303031735.jar log4j-1.2.17.jar commons-cli-1.2.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="C:/Users/piotr.gawron/workspace/transport/bin"/>
+            <zipfileset dir="C:\Program Files\eclipse\plugins\org.junit_4.11.0.v201303080030" includes="junit.jar"/>
+            <zipfileset dir="C:\Program Files\eclipse\plugins" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            <zipfileset dir="C:\Users\piotr.gawron\workspace\transport\lib" includes="log4j-1.2.17.jar"/>
+            <zipfileset dir="C:\Users\piotr.gawron\workspace\transport\lib" includes="commons-cli-1.2.jar"/>
+        </jar>
+    </target>
+</project>

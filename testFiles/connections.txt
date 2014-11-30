@@ -1,0 +1,7 @@
+	Czerwonak	Murowana Goślina	Pobiedziska	Poznań	Swarzędz	Września
+Czerwonak	1	1	0	0	0	0
+Murowana Goślina	1	1	0	0	0	0
+Pobiedziska	0	0	1	1	0	0
+Poznań	0	0	1	1	1	0
+Swarzędz	0	0	0	1	1	1
+Września	0	0	0	0	1	1

@@ -1,0 +1,284 @@
+1	Babiak	Babiak
+2	Baranów 	Baranów 
+3	Białośliwie	Białośliwie
+4	Blizanów	Blizanów
+5	Bojanowo	Bojanowo
+6	Borek Wielkopolski	Borek Wlkp.
+7	Bralin	Bralin
+8	Brodnica 	Brodnica
+9	Brudzew 	Brudzew
+10	Brzeziny 	Brzeziny 
+11	Budzyń 	Budzyń
+12	Buk	Buk
+13	Ceków	Ceków-Kolonia
+14	Chocz 	Chocz
+15	Chodów 	Chodów
+16	Chodzież	Chodzież
+17	Chrzypsko Wielkie 	Chrzypsko Wielkie
+18	Czajków 	Czajków
+19	Czarnków	Czarnków
+20	Czempiń	Czempiń
+21	Czermin 	Czermin
+22	Czerniejewo	Czerniejewo
+23	Czerwonak 	Czerwonak
+24	Dąbie	Dąbie
+25	Damasławek 	Damasławek
+26	Dobra	Dobra
+27	Dobrzyca 	Dobrzyca
+28	Dolsk	Dolsk
+29	Dominowo 	Dominowo
+30	Dopiewo 	Dopiewo
+31	Doruchów 	Doruchów
+32	Drawsko 	Drawsko
+33	Duszniki 	Duszniki
+34	Gizałki 	Gizałki
+35	Gniezno	Gniezno
+36	Godziesze Wielkie 	Godziesze Wielkie
+37	Gołańcz	Gołańcz
+38	Golina	Golina
+39	Gołuchów 	Gołuchów
+40	Gostyń	Gostyń
+41	Grabów nad Prosną	Grabów nad Prosną
+42	Granowo 	Granowo
+43	Grodziec 	Grodziec
+44	Grodzisk Wielkopolski	Grodzisk Wlkp.
+45	Grzegorzew 	Grzegorzew
+46	Jaraczewo 	Jaraczewo
+47	Jarocin	Jarocin
+48	Jastrowie	Jastrowie
+49	Jutrosin	Jutrosin
+50	Kaczory 	Kaczory
+51	Kalisz 	Kalisz
+52	Kamieniec 	Kamieniec
+53	Kawęczyn 	Kawęczyn
+54	Kazimierz Biskupi 	Kazimierz Biskupi
+55	Kaźmierz 	Kaźmierz
+56	Kępno	Kępno
+57	Kiszkowo 	Kiszkowo
+58	Kłecko	Kłecko
+59	Kleczew	Kleczew
+60	Kleszczewo 	Kleszczewo
+61	Kłodawa	Kłodawa
+62	Kobyla Góra 	Kobyla Góra
+63	Kobylin	Kobylin
+64	Kołaczkowo 	Kołaczkowo
+65	Koło	Koło
+66	Komorniki 	Komorniki
+67	Konin 	Konin
+68	Kórnik	Kórnik
+69	Kościan	Kościan
+70	Kościelec 	Kościelec
+71	Kostrzyn	Kostrzyn
+72	Kotlin 	Kotlin
+73	Koźmin Wielkopolski	Koźmin Wlkp.
+74	Koźminek 	Koźminek
+75	Krajenka	Krajenka
+76	Kramsk 	Kramsk
+77	Kraszewice 	Kraszewice
+78	Krobia	Krobia
+79	Krotoszyn	Krotoszyn
+80	Krzemieniewo 	Krzemieniewo
+81	Krzykosy 	Krzykosy
+82	Krzymów 	Krzymów
+83	Krzywiń	Krzywiń
+84	Krzyż Wielkopolski	Krzyż Wlkp.
+85	Książ Wielkopolski	Książ Wlkp.
+86	Kuślin 	Kuślin
+87	Kwilcz 	Kwilcz
+88	Lądek 	Lądek
+89	Łęka Opatowska 	Łęka Opatowska
+90	Leszno	Leszno
+91	Lipka 	Lipka
+92	Lipno 	Lipno
+93	Lisków 	Lisków
+94	Łobeżnica	Łobżenica
+95	Lubasz 	Lubasz
+96	Luboń 	Luboń
+97	Łubowo 	Łubowo
+98	Lwówek	Lwówek
+99	Malanów 	Malanów
+100	Margonin	Margonin
+101	Miasteczko Krajeńskie 	Miasteczko Krajeńskie
+102	Miedzichowo 	Miedzichowo
+103	Międzychód	Międzychód
+104	Miejska Górka	Miejska Górka
+105	Mieleszyn 	Mieleszyn
+106	Mieścisko 	Mieścisko
+107	Mikstat	Mikstat
+108	Miłosław	Miłosław
+109	Mosina	Mosina
+110	Murowana Goślina	Murowana Goślina
+111	Mycielin 	Mycielin
+112	Nekla	Nekla
+113	Niechanowo 	Niechanowo
+114	Nowe Miasto nad Wartą	Nowe Miasto nad Wartą
+115	Nowe Skalmierzyce	Nowe Skalmierzyce
+116	Nowy Tomyśl	Nowy Tomyśl
+117	Oborniki	Oborniki
+118	Obrzycko	Obrzycko
+119	Odolanów	Odolanów
+120	Okonek	Okonek
+121	Olszówka 	Olszówka
+122	Opalenica	Opalenica
+123	Opatówek 	Opatówek
+124	Orchowo 	Orchowo
+125	Osieczna	Osieczna
+126	Osiek Mały 	Osiek Mały
+127	Ostroróg	Ostroróg
+128	Ostrów Wielkopolski	Ostrów Wlkp.
+129	Ostrowite 	Ostrowite
+130	Ostrzeszów	Ostrzeszów
+131	Pakosław 	Pakosław
+132	Pępowo 	Pępowo
+133	Perzów 	Perzów
+134	Piaski 	Piaski
+135	Piła	Piła
+136	Pleszew	Pleszew
+137	Pniewy	Pniewy
+138	Pobiedziska	Pobiedziska
+139	Pogorzela	Pogorzela
+140	Połajewo 	Połajewo
+141	Poniec	Poniec
+142	Powidz 	Powidz
+143	Poznań	Poznań
+144	Przedecz	Przedecz
+145	Przemęt 	Przemęt
+146	Przygodzice	Przygodzice
+147	Przykona 	Przykona
+148	Puszczykowo 	Puszczykowo
+149	Pyzdry	Pyzdry
+150	Rakoniewice	Rakoniewice
+151	Raszków	Raszków
+152	Rawicz	Rawicz
+153	Rogoźno	Rogoźno
+154	Rokietnica 	Rokietnica
+155	Rozdrażew 	Rozdrażew
+156	Rychtal 	Rychtal
+157	Rychwał	Rychwał
+158	Ryczywół 	Ryczywół
+159	Rydzyna	Rydzyna
+160	Rzgów 	Rzgów
+161	Sempolno	Sępólno Kraj.
+162	Siedlec 	Siedlec
+163	Sieraków	Sieraków
+164	Sieroszewice 	Sieroszewice
+165	Skoki	Skoki
+166	Skulsk 	Skulsk
+167	Ślesin	Ślesin
+168	Słupca	Słupca
+169	Śmigiel	Śmigiel
+170	Sośnie 	Sośnie
+171	Śrem	Śrem
+172	Środa Wielkopolska	Środa Wlkp.
+173	Stare Miasto 	Stare Miasto
+174	Stawiszyn	Stawiszyn
+175	Stęszew	Stęszew
+176	Strzałkowo 	Strzałkowo
+177	Suchy Las	Suchy Las
+178	Sulmierzyce 	Sulmierzyce
+179	Swarzędz	Swarzędz
+180	Święciechowa 	Święciechowa
+181	Szamocin	Szamocin
+182	Szamotuły	Szamotuły
+183	Szczytniki 	Szczytniki
+184	Szydłowo 	Szydłowo
+185	Tarnówka 	Tarnówka
+186	Tarnowo Podgórne 	Tarnowo Podgórne
+187	Trzcianka	Trzcianka
+188	Trzcinica 	Trzcinica
+189	Trzemeszno	Trzemeszno
+190	Tuliszków	Tuliszków
+191	Turek	Turek
+192	Ujście	Ujście
+193	Wągrowiec	Wągrowiec
+194	Wapno 	Wapno
+195	Wieleń	Wieleń
+196	Wielichowo	Wielichowo
+197	Wierzbinek 	Wierzbinek
+198	Wijewo 	Wijewo
+199	Wilczyn 	Wilczyn
+200	Witkowo	Witkowo
+201	Władysławów 	Władysławów
+202	Włoszakowice 	Włoszakowice
+203	Wolsztyn	Wolsztyn
+204	Wronki	Wronki
+205	Września	Września
+206	Wyrzysk	Wyrzysk
+207	Wysoka	Wysoka
+208	Zagórów	Zagórów
+209	Zakrzewo 	Zakrzewo
+210	Zaniemyśl 	Zaniemyśl
+211	Zbąszyń	Zbąszyń
+212	Zduny	Zduny
+213	Żelazków 	Żelazków
+214	Żerków	Żerków
+215	Złotów	Złotów
+300	Poznań-Inowrocław	Mogilno
+301	Poznań-Bydgosz	Sadki
+302	Poznań - Chojnice	Debrzno
+303	Poznań - Koszalin	Szczecinek
+304	Poznań - Wałcz	Wałcz
+305	Krzyż - Stargard	Dobiegniew
+306	Krzyż - Gorzów	Drezdenko
+307	Poznań - Zbąszynek	Zbąszynek
+308	Poznań - Wrocław	Żmigród
+309	Krotoszyn - Milicz	Milicz
+310	Ostrów - Wrocław	Międzybórz
+311	Kępno - Kluczbork	Byczyna
+312	Kępno - Wieluń	Wieruszów
+313	Kalisz - Łódź	Błaszki
+314	Poznań - Warszawa	Krośniewice
+30000	A2 W !	Trzciel
+30001	179	Wałcz
+30004	188 NE	Debrzno
+30010	189 E	Więcbork
+30023	242 E	Więcbork
+30034	241	Kcynia
+30043	251	Żnin
+30050	177	Człopa
+30053	178	Wałcz
+30071	181	Drezdenko
+30105	160 N	Drezdenko
+30135	262	Mogilno
+30166	323	Góra
+30203	302	Zbąszynek
+30206	303	Babimost
+30215	305	Wschowa
+30233	314	Kargowa
+30235	315	Kolsko
+30236	316	Sława
+30253	449	Syców
+30257	449	Syców
+30261	450	Wieruszów
+30262	450	Wieruszów
+30269	266	Piotrków Kuj.
+30272	269	Izbica Kuj.
+30274	270	Izbica Kuj.
+30287	473	Uniejów
+30288	478	Poddębice
+30316	12	Wschowa
+30718	S8	Wieruszów
+30901	5 S!	Żmigród
+31408	32	Kargowa
+40909	39	Namysłów
+41101	11	Byczyna
+60805	10	Wałcz
+60806	22	Dobiegniew
+70201	22 NE	Debrzno
+70806	5 N	Janowiec Wlkp.
+70913	15	Mogilno
+71001	10 E	Sadki
+90204	11 N	Szczecinek
+90217	22	Wałcz
+90409	12	Błaszki
+90512	25	Międzybórz
+90612	25	Jeziora Wielkie
+90707	36	Wąsosz
+90711	15	Cieszków
+90811	24 W	Przytoczna 
+90818	92 W	Trzciel
+91117	A2 E	Uniejów
+91121	92 E	Krośniewice
+91714	83	Warta
+91715	72	Uniejów
+91813	S8	Syców

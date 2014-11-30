@@ -1,0 +1,7 @@
+	Czerwonak	Murowana Goślina	Pobiedziska	Poznań	Swarzędz	Września
+Czerwonak	0	10	20	30	40	50
+Murowana Goślina	10	0	30	40	50	60
+Pobiedziska	20	30	0	50	60	70
+Poznań	30.2	40	50	0	70	80
+Swarzędz	40	50	60	70	0	90
+Września	50	60	70	80	90	0
