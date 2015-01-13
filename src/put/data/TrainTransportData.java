@@ -67,7 +67,11 @@ public class TrainTransportData implements TransportTypeData {
 		MunicipalityConnection connection = municipalities.getConnection(from, to);
 		double distance = 100000;
 		if (connection == null || connection.getTrainDistance() == null) {
-			logger.warn("Unknown distance between " + from.getName() + " and " + to.getName());
+
+			if (connection.getBusDistance() != null) {
+				distance = connection.getBusDistance();
+			}
+			logger.warn("Unknown distance between " + from.getName() + " and " + to.getName() + ". Using: " + distance + " km.");
 		} else {
 			distance = connection.getTrainDistance();
 		}
@@ -77,6 +81,11 @@ public class TrainTransportData implements TransportTypeData {
 	@Override
 	public double kmCost() {
 		return Configuration.getConfiguration().getTrainKmCost();
+	}
+
+	@Override
+	public double kmIncome() {
+		return Configuration.getConfiguration().getTrainKmPassengerIncome();
 	}
 
 }

@@ -36,14 +36,17 @@ public class SchedulePrinter {
 		out.print("<body>");
 
 		Map<TransportType, Double> cost = new HashMap<TransportType, Double>();
+		Map<TransportType, Double> income = new HashMap<TransportType, Double>();
 
 		for (TransportType type : TransportType.values()) {
 			cost.put(type, 0.0);
+			income.put(type, 0.0);
 		}
 		for (TransportConnection tc : connections) {
 			TransportType type = tc.getType();
 
 			Double typeCost = cost.get(type);
+			Double typeIncome = income.get(type);
 			for (int i = 1; i < tc.getStops().size(); i++) {
 				Municipality first = tc.getStop(i - 1).getMunicipality();
 				Municipality second = tc.getStop(i).getMunicipality();
@@ -52,11 +55,26 @@ public class SchedulePrinter {
 					typeCost += type.getTransportTypeData().kmCost() * distance;
 				}
 			}
+			for (TrafficSource ts : tc.getTrafficSources()) {
+				Municipality first = ts.getStart();
+				Municipality second = ts.getStop();
+				if (first.getClass().equals(Municipality.class) && second.getClass().equals(Municipality.class)) {
+					double distance = tc.getDistanceBetweenStops(first, second);
+					typeIncome += type.getTransportTypeData().kmIncome() * distance * ts.getAmount();
+				}
+			}
 			cost.put(type, typeCost);
+			income.put(type, typeIncome);
 		}
 		out.print("<h1>Cost</h1>");
 		for (TransportType type : TransportType.values()) {
 			Double distance = cost.get(type);
+			out.print("<h2>" + type.getCommonName() + ": " + doubleToString(distance) + "</h2>");
+		}
+
+		out.print("<h1>Income</h1>");
+		for (TransportType type : TransportType.values()) {
+			Double distance = income.get(type);
 			out.print("<h2>" + type.getCommonName() + ": " + doubleToString(distance) + "</h2>");
 		}
 
@@ -83,7 +101,17 @@ public class SchedulePrinter {
 			}
 		}
 
-		result.append("<b>[" + tc.getType().getCommonName() + "] " + tc.getName() + " (Cost: " + doubleToString(cost) + ")</b><br/>\n");
+		Double income = 0.0;
+		for (TrafficSource ts : tc.getTrafficSources()) {
+			Municipality first = ts.getStart();
+			Municipality second = ts.getStop();
+			if (first.getClass().equals(Municipality.class) && second.getClass().equals(Municipality.class)) {
+				double distance = tc.getDistanceBetweenStops(first, second);
+				income += tc.getType().getTransportTypeData().kmIncome() * distance * ts.getAmount();
+			}
+		}
+
+		result.append("<b>[" + tc.getType().getCommonName() + "] " + tc.getName() + " (Cost: " + doubleToString(cost) + ", Income: " + doubleToString(income) + ")</b><br/>\n");
 
 		result.append("<table border=\"1\" >\n");
 		result.append("<tr>");

@@ -67,4 +67,9 @@ public class BusTransportData implements TransportTypeData {
 		return Configuration.getConfiguration().getBusKmCost();
 	}
 
+	@Override
+	public double kmIncome() {
+		return Configuration.getConfiguration().getBusKmPassengerIncome();
+	}
+
 }

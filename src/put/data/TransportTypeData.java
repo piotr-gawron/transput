@@ -7,4 +7,5 @@ public interface TransportTypeData {
 	public int timeBetween(ConnectionStop from, ConnectionStop to);
 	public double distanceBetween(Municipality first, Municipality last);
 	public double kmCost();
+	public double kmIncome();
 }

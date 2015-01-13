@@ -1,9 +1,12 @@
 package put.output;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import put.Configuration;
@@ -42,8 +45,8 @@ public class GoogleMapVis {
 		this.graphModel = graphModel;
 	}
 
-	public void print(String fileName, boolean printMunicipalities, boolean printBusTrafic, boolean printTrainTrafic) throws FileNotFoundException,
-			UnsupportedEncodingException {
+	public void print(String fileName, boolean printMunicipalities, boolean printBusTrafic, boolean printTrainTrafic) throws IOException {
+
 		connections = new GmapConnection[municipalities.getMunicipalityCount()][municipalities.getMunicipalityCount()];
 		PrintWriter out = new PrintWriter(fileName, Configuration.getConfiguration().getEncoding());
 
@@ -81,10 +84,15 @@ public class GoogleMapVis {
 		out.print("</head>\n");
 		out.print("<body>\n");
 		out.print("<div style=\"height: 100%\" id=\"map-canvas\"></div>\n");
+		String legendName = FilenameUtils.getBaseName(fileName) + ".png";
+		out.print("<img src=\"" + legendName + "\" style=\"position: fixed; bottom: 0px; left: 0px;\">\n");
 
 		out.print("</body>\n");
 		out.print("</html>\n");
 		out.close();
+
+		LegendGenerator.generate(0, maxValue, Color.GREEN, Color.RED, FilenameUtils.getPath(fileName) + legendName, 640, 60);
+
 	}
 
 	private void printBuses(PrintWriter out) {

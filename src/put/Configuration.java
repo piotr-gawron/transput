@@ -53,6 +53,8 @@ public class Configuration {
 	private double	busKmCost													= 6.4;
 	private int			trainSize													= 200;
 	private double	trainKmCost												= 24;
+	private double	trainKmPassengerIncome						= 0.15;
+	private double	busKmPassengerIncome							= 0.15;
 
 	private double	epsilon														= 1e-6;
 
@@ -129,6 +131,9 @@ public class Configuration {
 		logger.debug("* otherMunicipalitiesFileName: " + otherMunicipalitiesFileName);
 		logger.debug("* municipalitiesCoordinatesFileName: " + municipalitiesCoordinatesFileName);
 
+		logger.debug("* changeDifferentTransportTypeTime: " + changeDifferentTransportTypeTime);
+		logger.debug("* changeSameTransportTypeTime: " + changeSameTransportTypeTime);
+		
 		logger.debug("* busConnectionFileName: " + busConnectionFileName);
 		logger.debug("* busNeighborhoodFileName: " + busNeighborhoodFileName);
 		logger.debug("* busesFileName: " + busesFileName);
@@ -150,6 +155,9 @@ public class Configuration {
 		logger.debug("* busSize: " + busSize);
 		logger.debug("* busKmCost: " + busKmCost);
 		logger.debug("* trainKmCost: " + trainKmCost);
+
+		logger.debug("* busKmPassengerIncome: " + busKmPassengerIncome);
+		logger.debug("* trainKmPassengerIncome: " + trainKmPassengerIncome);
 
 		validConfiguration = true;
 	}
@@ -206,6 +214,14 @@ public class Configuration {
 			maxColumns = Integer.valueOf(prop.getProperty("maxColumns"));
 		}
 
+		if (prop.getProperty("changeDifferentTransportTypeTime") != null) {
+			changeDifferentTransportTypeTime = Integer.valueOf(prop.getProperty("changeDifferentTransportTypeTime"));
+		}
+
+		if (prop.getProperty("changeSameTransportTypeTime") != null) {
+			changeSameTransportTypeTime = Integer.valueOf(prop.getProperty("changeSameTransportTypeTime"));
+		}
+
 		if (prop.getProperty("minTrafficForConnection") != null) {
 			minTrafficForConnection = Double.valueOf(prop.getProperty("minTrafficForConnection"));
 		}
@@ -218,13 +234,19 @@ public class Configuration {
 			busSize = Integer.valueOf(prop.getProperty("busSize"));
 		}
 		if (prop.getProperty("busKmCost") != null) {
-			busKmCost= Double.valueOf(prop.getProperty("busKmCost"));
+			busKmCost = Double.valueOf(prop.getProperty("busKmCost"));
+		}
+		if (prop.getProperty("busKmPassengerIncome") != null) {
+			busKmPassengerIncome = Double.valueOf(prop.getProperty("busKmPassengerIncome"));
 		}
 		if (prop.getProperty("trainSize") != null) {
 			trainSize = Integer.valueOf(prop.getProperty("trainSize"));
 		}
 		if (prop.getProperty("trainKmCost") != null) {
-			trainKmCost= Double.valueOf(prop.getProperty("trainKmCost"));
+			trainKmCost = Double.valueOf(prop.getProperty("trainKmCost"));
+		}
+		if (prop.getProperty("trainKmPassengerIncome") != null) {
+			trainKmPassengerIncome = Double.valueOf(prop.getProperty("trainKmPassengerIncome"));
 		}
 	}
 
@@ -387,5 +409,22 @@ public class Configuration {
 	public double getTrainKmCost() {
 		return trainKmCost;
 	}
+
+	/**
+	 * @return the trainKmPassengerIncome
+	 * @see #trainKmPassengerIncome
+	 */
+	public double getTrainKmPassengerIncome() {
+		return trainKmPassengerIncome;
+	}
+
+	/**
+	 * @return the busKmPassengerIncome
+	 * @see #busKmPassengerIncome
+	 */
+	public double getBusKmPassengerIncome() {
+		return busKmPassengerIncome;
+	}
+
 
 }
