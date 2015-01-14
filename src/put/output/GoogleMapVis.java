@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
@@ -197,6 +198,7 @@ public class GoogleMapVis {
 		if (gConnection == null) {
 			gConnection = createConnection(stop.getMunicipality(), stop2.getMunicipality(), 0, transportType);
 			connections[start][end] = gConnection;
+			connections[end][start] = gConnection;
 		}
 		gConnection.traffic += connection.getTraffic();
 		for (TrafficSource ts : connection.getTrafficSources()) {
@@ -207,9 +209,9 @@ public class GoogleMapVis {
 	}
 
 	private void printConnection(PrintWriter out, int i, GmapConnection connection) {
-		if (connection.traffic < Configuration.getConfiguration().getMinTrafficForConnection()) {
-			return;
-		}
+//		if (connection.traffic < Configuration.getConfiguration().getMinTrafficForConnection()) {
+//			return;
+//		}
 		out.print("    var line" + i + " = new google.maps.Polyline({\n");
 		out.print("      path: [" + connection.from + "," + connection.to + "],\n");
 		out.print("      strokeColor: '" + getColor(connection.traffic) + "',\n");
@@ -244,7 +246,9 @@ public class GoogleMapVis {
 		if (traffic > maxValue || traffic < 0) {
 			throw new InvalidArgumentException("Invalid traffic in gmap represenatation");
 		}
-		result.type = type.getCommonName();
+		if (type != null) {
+			result.type = type.getCommonName();
+		}
 		result.traffic = traffic;
 		result.title = from.getName() + " - " + to.getName();
 		return result;
@@ -285,4 +289,127 @@ public class GoogleMapVis {
 		out.print("      infowindow" + i + ".open(map,marker" + i + ");\n");
 		out.print("    });\n");
 	}
+
+	public void printConnections(String fileName, boolean printMunicipalities, boolean printBusTrafic, boolean printTrainTrafic,
+			List<TransportConnection> suggestedConnections) throws IOException {
+		maxValue = 1;
+		connections = new GmapConnection[municipalities.getMunicipalityCount()][municipalities.getMunicipalityCount()];
+		PrintWriter out = new PrintWriter(fileName, Configuration.getConfiguration().getEncoding());
+
+		out.print("<html><head><title>Computed schedule</title>\n");
+		out.print("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n");
+		out.print("<script src=\"https://maps.googleapis.com/maps/api/js?v=3.exp\"></script>\n");
+
+		out.print("<script>\n");
+		out.print("  function initialize() {\n");
+		out.print("    var myLatlng = new google.maps.LatLng(52.414985,16.925125);\n");
+		out.print("    var mapOptions = {\n");
+		out.print("      zoom: 8,\n");
+		out.print("      center: myLatlng\n");
+		out.print("    }\n");
+		out.print("    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);\n");
+
+		if (printMunicipalities) {
+			for (int i = 0; i < municipalities.getMunicipalityCount(); i++) {
+				Municipality municipality = municipalities.getMunicipality(i);
+				printMunicipality(out, i, municipality);
+			}
+		}
+		if (printBusTrafic) {
+			printBusesCount(out, suggestedConnections);
+		}
+		if (printTrainTrafic) {
+			printTrainsCount(out, suggestedConnections);
+		}
+		out.print("  }\n");
+
+		out.print("  google.maps.event.addDomListener(window, 'load', initialize);\n");
+
+		out.print("</script>\n");
+
+		out.print("</head>\n");
+		out.print("<body>\n");
+		out.print("<div style=\"height: 100%\" id=\"map-canvas\"></div>\n");
+		String legendName = FilenameUtils.getBaseName(fileName) + ".png";
+		out.print("<img src=\"" + legendName + "\" style=\"position: fixed; bottom: 0px; left: 0px;\">\n");
+
+		out.print("</body>\n");
+		out.print("</html>\n");
+		out.close();
+
+		LegendGenerator.generate(0, maxValue, Color.GREEN, Color.RED, FilenameUtils.getPath(fileName) + legendName, 640, 60);
+
+	}
+
+	private void printBusesCount(PrintWriter out, List<TransportConnection> suggestedConnections) {
+		int counter = 0;
+		createConnectionsCount(TransportType.BUS, suggestedConnections);
+		int count = municipalities.getMunicipalityCount();
+
+		for (int i = 0; i < count; i++) {
+			for (int j = i + 1; j < count; j++) {
+				if (connections[i][j] != null) {
+					maxValue = Math.max(maxValue, connections[i][j].traffic);
+				}
+			}
+		}
+
+		for (int i = 0; i < count; i++) {
+			for (int j = i + 1; j < count; j++) {
+				if (connections[i][j] != null && connections[i][j].traffic > 0) {
+					printConnection(out, counter++, connections[i][j]);
+				}
+			}
+		}
+	}
+
+	private void printTrainsCount(PrintWriter out, List<TransportConnection> suggestedConnections) {
+		int counter = 0;
+		createConnectionsCount(TransportType.TRAIN, suggestedConnections);
+		int count = municipalities.getMunicipalityCount();
+
+		for (int i = 0; i < count; i++) {
+			for (int j = i + 1; j < count; j++) {
+				if (connections[i][j] != null) {
+					maxValue = Math.max(maxValue, connections[i][j].traffic);
+				}
+			}
+		}
+
+		for (int i = 0; i < count; i++) {
+			for (int j = i + 1; j < count; j++) {
+				if (connections[i][j] != null && connections[i][j].traffic > 0) {
+					printConnection(out, counter++, connections[i][j]);
+				}
+			}
+		}
+	}
+
+	private void createConnectionsCount(TransportType type, List<TransportConnection> suggestedConnections) {
+		for (TransportConnection connection : suggestedConnections) {
+			if (connection.getType().equals(type)) {
+				for (int i = 1; i < connection.getStops().size(); i++) {
+					ConnectionStop stop = connection.getStop(i - 1);
+					ConnectionStop stop2 = connection.getStop(i);
+					Integer start = municipalities.getIndexByMunicipality(stop.getMunicipality());
+					Integer end = municipalities.getIndexByMunicipality(stop2.getMunicipality());
+
+					if (start != null && end != null) {
+						GmapConnection gConnection = connections[start][end];
+						if (gConnection == null) {
+							gConnection = createConnection(stop.getMunicipality(), stop2.getMunicipality(), 0, null);
+							connections[start][end] = gConnection;
+							connections[end][start] = gConnection;
+						}
+						gConnection.traffic += 1;
+						gConnection.desc += type.getCommonName() + ": " + connection.getName() + "<br/>";
+					} else {
+						logger.debug("SKIP: " + stop.getMunicipality().getName() + ", " + stop2.getMunicipality().getName());
+					}
+				}
+			}
+		}
+
+	}
+
 }
