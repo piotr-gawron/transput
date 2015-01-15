@@ -364,7 +364,7 @@ public class GoogleMapVis {
 	}
 
 	private void printTrainsCount(PrintWriter out, List<TransportConnection> suggestedConnections) {
-		int counter = 0;
+		int counter = 100000;
 		createConnectionsCount(TransportType.TRAIN, suggestedConnections);
 		int count = municipalities.getMunicipalityCount();
 

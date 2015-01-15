@@ -23,7 +23,7 @@
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
                 <attribute name="Rsrc-Main-Class" value="put.Main"/>
                 <attribute name="Class-Path" value="."/>
-                <attribute name="Rsrc-Class-Path" value="./ junit.jar org.hamcrest.core_1.3.0.v201303031735.jar log4j-1.2.17.jar commons-cli-1.2.jar"/>
+                <attribute name="Rsrc-Class-Path" value="./ junit.jar org.hamcrest.core_1.3.0.v201303031735.jar log4j-1.2.17.jar commons-cli-1.2.jar commons-io-2.4.jar"/>
             </manifest>
             <zipfileset src="jar-in-jar-loader.zip"/>
             <fileset dir="bin"/>
@@ -31,6 +31,7 @@
             <zipfileset dir="C:\Program Files\eclipse\plugins" includes="org.hamcrest.core_1.3.0.v201303031735.jar"/>
             <zipfileset dir="lib" includes="log4j-1.2.17.jar"/>
             <zipfileset dir="lib" includes="commons-cli-1.2.jar"/>
+            <zipfileset dir="lib" includes="commons-io-2.4.jar"/>
         </jar>
     </target>
 </project>
