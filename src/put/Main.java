@@ -151,14 +151,14 @@ public class Main {
 		graphModel.putTrafficOnConnections();
 
 		GoogleMapVis gm = new GoogleMapVis(municipalities, graphModel);
-		gm.print("out/gmapMunicipalities.html", true, false, false);
-		gm.print("out/gmapBusTraffic.html", false, true, false);
-		gm.print("out/gmapTrainTraffic.html", false, false, true);
-		gm.print("out/gmapBusTrainTraffic.html", false, true, true);
-		
-		gm.printConnections("out/gmapBusConnection.html", false, true, false, suggestedConnections);
-		gm.printConnections("out/gmapTrainConnection.html", false, false, true, suggestedConnections);
-		gm.printConnections("out/gmapBusTrainConnection.html", false, true, true, suggestedConnections);
+		gm.print("out/gmapMunicipalities.html", true, false, false, "Municipalities");
+		gm.print("out/gmapBusTraffic.html", false, true, false, "People using buses");
+		gm.print("out/gmapTrainTraffic.html", false, false, true, "People using trains");
+		gm.print("out/gmapBusTrainTraffic.html", false, true, true, "People using buses and trains");
+
+		gm.printConnections("out/gmapBusConnection.html", false, true, false, suggestedConnections, "Suggested bus connections");
+		gm.printConnections("out/gmapTrainConnection.html", false, false, true, suggestedConnections, "Suggested train connections");
+		gm.printConnections("out/gmapBusTrainConnection.html", false, true, true, suggestedConnections, "Suggested connections");
 	}
 
 }

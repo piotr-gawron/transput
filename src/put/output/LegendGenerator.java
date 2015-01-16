@@ -1,6 +1,7 @@
 package put.output;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,7 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class LegendGenerator {
-	public static final void generate(double minVal, double maxVal, Color from, Color to, String fileName, int width, int height) throws IOException {
+	public static final void generate(double minVal, double maxVal, Color from, Color to, String fileName, int width, int height, String units,
+			String description) throws IOException {
 		// TYPE_INT_ARGB specifies the image format: 8-bit RGBA packed
 		// into integer pixels
 		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -18,9 +20,8 @@ public class LegendGenerator {
 
 		ig2.fillRect(0, 0, width, height);
 
-
 		int left = 20;
-		width -= 2*left;
+		width -= 2 * left;
 
 		for (int y = left; y < width + left; y++) {
 			double scale = ((double) (y - left)) / ((double) width);
@@ -35,9 +36,14 @@ public class LegendGenerator {
 			int x = left + i * width / 10;
 			ig2.drawLine(x, 25, x, 50);
 
-			int val = (int)((maxVal - minVal) * i / 10 + minVal);
-			ig2.drawString(val+"", x-10, 10);
+			int val = (int) ((maxVal - minVal) * i / 10 + minVal);
+			ig2.drawString(val + "", x - 10, 10);
 		}
+		ig2.setFont(new Font("TimesRoman", Font.PLAIN, 10)); 
+		ig2.drawString("["+units+"]", left+width-20, 22);
+
+		ig2.setFont(new Font("TimesRoman", Font.PLAIN, 22)); 
+		ig2.drawString(description,left, 80);
 
 		ImageIO.write(bi, "PNG", new File(fileName));
 	}

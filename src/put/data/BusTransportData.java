@@ -22,7 +22,7 @@ public class BusTransportData implements TransportTypeData {
 
 	@Override
 	public double averageSpeed() {
-		return 40;
+		return Configuration.getConfiguration().getBusSpeed();
 	}
 
 	@Override

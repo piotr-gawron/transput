@@ -22,7 +22,7 @@ public class TrainTransportData implements TransportTypeData {
 
 	@Override
 	public double averageSpeed() {
-		return 60;
+		return Configuration.getConfiguration().getTrainSpeed();
 	}
 
 	@Override

@@ -50,8 +50,10 @@ public class Configuration {
 	private double	negligibleTrafficSize							= 0.1;
 
 	private int			busSize														= 80;
+	private int			busSpeed													= 40;
 	private double	busKmCost													= 6.4;
 	private int			trainSize													= 200;
+	private int			trainSpeed												= 60;
 	private double	trainKmCost												= 24;
 	private double	trainKmPassengerIncome						= 0.15;
 	private double	busKmPassengerIncome							= 0.15;
@@ -133,7 +135,7 @@ public class Configuration {
 
 		logger.debug("* changeDifferentTransportTypeTime: " + changeDifferentTransportTypeTime);
 		logger.debug("* changeSameTransportTypeTime: " + changeSameTransportTypeTime);
-		
+
 		logger.debug("* busConnectionFileName: " + busConnectionFileName);
 		logger.debug("* busNeighborhoodFileName: " + busNeighborhoodFileName);
 		logger.debug("* busesFileName: " + busesFileName);
@@ -153,7 +155,10 @@ public class Configuration {
 		logger.debug("* minTrafficForConnection: " + minTrafficForConnection);
 
 		logger.debug("* busSize: " + busSize);
+		logger.debug("* busSpeed: " + busSpeed);
 		logger.debug("* busKmCost: " + busKmCost);
+		logger.debug("* trainKmCost: " + trainKmCost);
+		logger.debug("* trainSpeed: " + trainSpeed);
 		logger.debug("* trainKmCost: " + trainKmCost);
 
 		logger.debug("* busKmPassengerIncome: " + busKmPassengerIncome);
@@ -233,6 +238,9 @@ public class Configuration {
 		if (prop.getProperty("busSize") != null) {
 			busSize = Integer.valueOf(prop.getProperty("busSize"));
 		}
+		if (prop.getProperty("busSpeed") != null) {
+			busSpeed= Integer.valueOf(prop.getProperty("busSpeed"));
+		}
 		if (prop.getProperty("busKmCost") != null) {
 			busKmCost = Double.valueOf(prop.getProperty("busKmCost"));
 		}
@@ -241,6 +249,9 @@ public class Configuration {
 		}
 		if (prop.getProperty("trainSize") != null) {
 			trainSize = Integer.valueOf(prop.getProperty("trainSize"));
+		}
+		if (prop.getProperty("trainSpeed") != null) {
+			trainSpeed= Integer.valueOf(prop.getProperty("trainSpeed"));
 		}
 		if (prop.getProperty("trainKmCost") != null) {
 			trainKmCost = Double.valueOf(prop.getProperty("trainKmCost"));
@@ -366,8 +377,15 @@ public class Configuration {
 		return busSize;
 	}
 
+	public int getBusSpeed() {
+		return busSpeed;
+	}
+
 	public int getTrainSize() {
 		return trainSize;
+	}
+	public int getTrainSpeed() {
+		return trainSpeed;
 	}
 
 	public double getNegligibleTrafficSize() {
@@ -425,6 +443,5 @@ public class Configuration {
 	public double getBusKmPassengerIncome() {
 		return busKmPassengerIncome;
 	}
-
 
 }

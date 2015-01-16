@@ -1,10 +1,8 @@
 package put.output;
 
 import java.awt.Color;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
@@ -46,7 +44,7 @@ public class GoogleMapVis {
 		this.graphModel = graphModel;
 	}
 
-	public void print(String fileName, boolean printMunicipalities, boolean printBusTrafic, boolean printTrainTrafic) throws IOException {
+	public void print(String fileName, boolean printMunicipalities, boolean printBusTrafic, boolean printTrainTrafic, String title) throws IOException {
 
 		connections = new GmapConnection[municipalities.getMunicipalityCount()][municipalities.getMunicipalityCount()];
 		PrintWriter out = new PrintWriter(fileName, Configuration.getConfiguration().getEncoding());
@@ -92,7 +90,7 @@ public class GoogleMapVis {
 		out.print("</html>\n");
 		out.close();
 
-		LegendGenerator.generate(0, maxValue, Color.GREEN, Color.RED, FilenameUtils.getPath(fileName) + legendName, 640, 60);
+		LegendGenerator.generate(0, maxValue, Color.GREEN, Color.RED, FilenameUtils.getPath(fileName) + legendName, 640, 100, "person", title);
 
 	}
 
@@ -209,9 +207,10 @@ public class GoogleMapVis {
 	}
 
 	private void printConnection(PrintWriter out, int i, GmapConnection connection) {
-//		if (connection.traffic < Configuration.getConfiguration().getMinTrafficForConnection()) {
-//			return;
-//		}
+		// if (connection.traffic <
+		// Configuration.getConfiguration().getMinTrafficForConnection()) {
+		// return;
+		// }
 		out.print("    var line" + i + " = new google.maps.Polyline({\n");
 		out.print("      path: [" + connection.from + "," + connection.to + "],\n");
 		out.print("      strokeColor: '" + getColor(connection.traffic) + "',\n");
@@ -291,7 +290,7 @@ public class GoogleMapVis {
 	}
 
 	public void printConnections(String fileName, boolean printMunicipalities, boolean printBusTrafic, boolean printTrainTrafic,
-			List<TransportConnection> suggestedConnections) throws IOException {
+			List<TransportConnection> suggestedConnections, String title) throws IOException {
 		maxValue = 1;
 		connections = new GmapConnection[municipalities.getMunicipalityCount()][municipalities.getMunicipalityCount()];
 		PrintWriter out = new PrintWriter(fileName, Configuration.getConfiguration().getEncoding());
@@ -337,7 +336,7 @@ public class GoogleMapVis {
 		out.print("</html>\n");
 		out.close();
 
-		LegendGenerator.generate(0, maxValue, Color.GREEN, Color.RED, FilenameUtils.getPath(fileName) + legendName, 640, 60);
+		LegendGenerator.generate(0, maxValue, Color.GREEN, Color.RED, FilenameUtils.getPath(fileName) + legendName, 640, 100, "ride", title);
 
 	}
 
@@ -403,8 +402,6 @@ public class GoogleMapVis {
 						}
 						gConnection.traffic += 1;
 						gConnection.desc += type.getCommonName() + ": " + connection.getName() + "<br/>";
-					} else {
-						logger.debug("SKIP: " + stop.getMunicipality().getName() + ", " + stop2.getMunicipality().getName());
 					}
 				}
 			}

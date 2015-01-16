@@ -22,7 +22,7 @@ public class LegendGeneratorTest {
 	public void test() throws Exception {
 		try {
 			String filename = "tmp.png";
-			LegendGenerator.generate(-0, 1000, Color.GREEN, Color.RED, filename, 640, 100);
+			LegendGenerator.generate(-0, 1000, Color.GREEN, Color.RED, filename, 640, 100, "UNIT", "Some description");
 			Desktop.getDesktop().open(new File(filename));
 		} catch (Exception e) {
 			e.printStackTrace();
