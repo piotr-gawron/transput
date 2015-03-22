@@ -178,4 +178,21 @@ public class SchedulePrinter {
 	public String doubleToString(double d) {
 		return String.format("%1$,.2f", d);
 	}
+
+	public void printConnections(String fileName) throws FileNotFoundException, UnsupportedEncodingException {
+		PrintWriter out = new PrintWriter(fileName, Configuration.getConfiguration().getEncoding());
+
+		out.print("<html><head><title>Suggested connections</title>");
+		out.print("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+		out.print("</head>");
+		out.print("<body>");
+		out.print("<table>");
+		for (TransportConnection connection: connections) {
+			out.print("<tr><td>"+connection.getName()+"</td>");
+		}
+		out.print("</table>");
+		out.print("</body>");
+		out.print("</html>");
+		out.close();
+	}
 }

@@ -159,6 +159,7 @@ public class Main {
 		gm.printConnections("out/gmapBusConnection.html", false, true, false, suggestedConnections, "Suggested bus connections");
 		gm.printConnections("out/gmapTrainConnection.html", false, false, true, suggestedConnections, "Suggested train connections");
 		gm.printConnections("out/gmapBusTrainConnection.html", false, true, true, suggestedConnections, "Suggested connections");
+		sp.printConnections("out/lines.html");
 	}
 
 }
